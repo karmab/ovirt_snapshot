@@ -1,0 +1,23 @@
+{
+  "language": "python",
+  "python": "2.7",
+  "sudo": false,
+  "addons": {
+    "apt": {
+      "packages": [
+        "python-pip"
+      ]
+    }
+  },
+  "install": [
+    "pip install ansible",
+    "ansible --version",
+    "printf '[defaults]\\nroles_path=roles' >ansible.cfg"
+  ],
+  "script": [
+    "ansible-playbook test.yml -i inventory --syntax-check"
+  ],
+  "group": "stable",
+  "dist": "precise",
+  "os": "linux"
+}

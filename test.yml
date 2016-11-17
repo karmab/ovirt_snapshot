@@ -1,0 +1,50 @@
+---
+- name: Test this stuff
+  hosts: ovirt36
+  remote_user: centos
+  gather_facts: true
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+
+  - name: Create Ovirt snapshot
+    ovirt_snapshot:
+     state: present
+     url: https://127.0.0.1
+     user: admin@internal
+     password: unix1234
+     name: "{{ item }}"
+     wait: True
+     vm: prout1
+     force: True
+    with_items:
+     - X1
+     - X2
+#     - X3
+#
+#  - name: Remove Specific Ovirt snapshot 
+#    ovirt_snapshot:
+#     state: absent
+#     url: https://127.0.0.1
+#     user: admin@internal
+#     password: unix1234
+#     name: Weekly Snapshot{{ item }}
+#     vm: prout1
+#    with_items: 
+#     - 2
+#     - 3
+#     - 4
+#     - 6
+#     - 7 
+
+  - name: Restore Ovirt snapshot
+    ovirt_snapshot:
+     state: restored
+     url: https://127.0.0.1
+     user: admin@internal
+     password: unix1234
+     name: X1
+     wait: True
+     vm: prout1
+     force: True

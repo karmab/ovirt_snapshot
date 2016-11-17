@@ -1,0 +1,21 @@
+---
+- name: Test this stuff
+  hosts: ovirt36
+  remote_user: centos
+  gather_facts: true
+  become: yes
+  become_user: root
+  become_method: sudo
+  tasks:
+
+  - name: Restore Ovirt snapshot
+    ovirt_snapshot:
+     state: restored
+     url: https://127.0.0.1
+     user: admin@internal
+     password: unix1234
+     name: X1
+     wait: True
+     vm: prout1
+     force: True
+     start: True
