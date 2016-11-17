@@ -110,6 +110,7 @@ def main():
                     module.fail_json(msg='Cant Restore from snapshot while vm %s is up' % vmname)
                 else:
                     api.vms.get(vmname).stop()
+                    # api.vms.get(vmname).shutdown()
                     while api.vms.get(vmname).status.state != "down":
                         sleep(5)
                 snapshot = snapshots[0]
