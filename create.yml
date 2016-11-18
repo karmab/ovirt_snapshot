@@ -1,5 +1,5 @@
 ---
-- name: Test this stuff
+- name: Test ovirt_snapshot
   hosts: ovirt36
   remote_user: centos
   gather_facts: true
