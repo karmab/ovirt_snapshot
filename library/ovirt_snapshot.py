@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from ansible.module_utils.basic import AnsibleModule
+from ansible.module_utils.basic import *
 from datetime import datetime
 from ovirtsdk.api import API
 from ovirtsdk.xml import params
