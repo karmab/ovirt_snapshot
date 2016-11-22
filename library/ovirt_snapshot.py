@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from ansible.module_utils.basic import *
+from ansible.module_utils.basic import AnsibleModule
 from datetime import datetime
 from ovirtsdk.api import API
 from ovirtsdk.xml import params
@@ -33,7 +33,8 @@ EXAMPLES = '''
 def wait_ready(api, name):
     while True:
         jobs = [job for job in api.jobs.list() if job.get_status().get_state() == 'STARTED' and 'VM %s' % name in job.get_description()]
-        if not jobs:
+        snaps = [snap for snap in api.vms.get(name=name).snapshots.list() if snap.get_snapshot_status() not in 'ok']
+        if not jobs and not snaps:
             break
         sleep(5)
 
